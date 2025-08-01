@@ -1,29 +1,47 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
+<head>
+    <title>Autopista Siglo XXI</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    
+    <!-- DNS Prefetch -->
+    <link rel="dns-prefetch" href="https://tile.openstreetmap.org">
+    <link rel="dns-prefetch preconnect" href="https://unpkg.com" />
+    
+    <!-- Preload Scripts -->
+    <link rel="preload" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" as="script">
+    <link rel="preload" href="https://unpkg.com/leaflet-ui@0.6.0/dist/leaflet-ui.js" as="script">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/@raruto/leaflet-elevation@2.5.1/dist/leaflet-elevation.min.css" />
+</head>
+<body>
+    <header class="header">
+        <div class="logo-left">
+            <img src="images/logo-izquierdo.png" alt="Logo Institución" class="logo logo-left-img">
+        </div>
+        <div class="title">
+            <h1>Accidentes Autopista Siglo XXI<br>(2025)</h1>
+        </div>
+        <div class="logo-right">
+            <img src="images/logo-derecho.png" alt="Logo Institución" class="logo logo-right-img">
+        </div>
+    </header>
+    
+    <div id="map" class="leaflet-map"></div>
 
-	<head>
-		<title>Accidentes viales XXI   </title>
-		<meta charset="utf-8">
-		<link rel="icon" href="images/favicon.png">
-		<link rel="stylesheet" type="text/css" href="css/styles.css">
-
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-		<script src="plugins/leaflet.js"></script>
-		<link rel="stylesheet" type="text/css" href="plugins/leaflet.css">
-	</head>
-
-	<body>
-		<header>
-			<img src="images/logo.png" alt="Logo CAEG" id="logo">
-			<h1>ACCIDENTES VIALES DE LA AUTOPISTA SIGLO XXI</h1>
-		</header>
-
-		<div id="map"></div>
-		<script src="geojson/autopista_altura.js"></script>
-		<script src="js/maps.js"></script>	
-	</body>
-
+    <!-- Leaflet Scripts -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-ui@0.6.0/dist/leaflet-ui.js"></script>
+    <script src="https://unpkg.com/@raruto/leaflet-elevation@2.5.1/dist/leaflet-elevation.min.js"></script>
+    
+    <!-- Custom Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/maps.js"></script>
+</body>
 </html>
-
-   

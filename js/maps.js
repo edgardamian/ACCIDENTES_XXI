@@ -1,44 +1,34 @@
-//---------------------------------------------------------------------------------------------------------
-//Crear un objeto mapa
-var map = L.map("map").setView([18.990811,-102.087551], 9);
+// Inicialización del mapa y controles
+function initializeMap() {
+    // Inicializar configuración de idioma
+    initializeI18n();
+    
+    // Crear el mapa
+    const map = L.map('map', mapConfig.map);
 
+    // Crear control de elevación
+    const controlElevation = L.control.elevation(mapConfig.elevationControl.options).addTo(map);
+    
+    // Crear control de capas
+    const controlLayer = L.control.layers(null, null, mapConfig.layersControl.options);
 
-//---------------------------------------------------------------------------------------------------------
-//Añadir Mapas Base
+    // Event listener para cuando se cargan los datos de elevación
+    controlElevation.on('eledata_loaded', ({layer, name}) => {
+        controlLayer.addTo(map);
+        
+        layer.eachLayer((trkseg) => {
+            if (trkseg.feature.geometry.type !== "Point") {
+                const layerName = (trkseg.feature && 
+                                 trkseg.feature.properties && 
+                                 trkseg.feature.properties.name) || name;
+                controlLayer.addOverlay(trkseg, layerName);
+            }
+        });
+    });
+    
+    // Cargar los datos de elevación
+    controlElevation.load(mapConfig.elevationControl.url);
+}
 
-//OpenStreetMap
-var osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png");
-
-//BlancoYNegro de Carto
-var blackAndWhite = L.tileLayer("http://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png").addTo(map);
-
-//Google Maps Calles
-var googleStreets = L.tileLayer("https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}");
-
-//Google Maps Satélite
-var googleSat = L.tileLayer("http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}");
-
-
-//---------------------------------------------------------------------------------------------------------
-//Agregar Archivos GeoJSON
-var autopista = L.geoJSON(autopista);
-
-console.log(autopista);
-
-//---------------------------------------------------------------------------------------------------------
-//Diccionario de Mapas Base
-var baseMaps =	{			
-					"Desactivar Mapas Base"	: L.layerGroup([]),
-					"Calles colores"			: osm,
-					"Calles oscuro"	: blackAndWhite,
-					"Google Maps Calles"	: googleStreets,
-					"Google Maps Satélite"	: googleSat
-				};
-
-//Diccionario de Capas
-var layers =	{	
-					"Autopista" : autopista
-				};
-
-//Añadir Control de Capas
-L.control.layers(baseMaps, layers).addTo(map);
+// Inicializar el mapa cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', initializeMap);

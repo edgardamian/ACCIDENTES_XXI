@@ -1,45 +1,156 @@
-body, html{
-    margin: 0;
-    padding: 0;
+html,
+body,
+.leaflet-map {
     height: 100%;
-}
-
-header{
-    background-color: #0074d9;
-    display: flex;
-    align-items: center;
-    padding: 10px;
-}
-
-#logo{
-    height: 50px;
-    margin-right: 20px;
-    display: flex;
-    align-items: center;
-}
-
-header h1{
-    color: white;
-    text-align: center;
-    flex-grow: 1;
-
-}
-
-#map{
-    /*border-style: solid;*/
-    height: calc(100% - 100px);
     width: 100%;
+    padding: 0px;
+    margin: 0px;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+}
 
-@media(max-width:768px){
-    header{
-        flex-direction: column;
-        text-align: center;
+/* Header Styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #28a745; /* Verde */
+    color: white;
+    padding: 10px 20px;
+    height: 80px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 1001;
+}
+
+.logo-left, .logo-right {
+    flex: 0 0 auto;
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilos base para logos */
+.logo {
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Logo del lado izquierdo - Ajusta estos valores según necesites */
+.logo-left-img {
+/*     max-height: 80px;
+    max-width: 90px; */
+    /* Puedes agregar más propiedades específicas aquí:*/
+    width: 60px;            /* ancho fijo */
+    height: 30px;           /* alto fijo */
+    transform: scale(2);  /* escalar */
+    margin: 3px;           /*  margen específico */
+    margin-left: 30px;  /* Más separación del borde izquierdo */
+}
+
+/* Logo del lado derecho - Ajusta estos valores según necesites */
+.logo-right-img {
+/*     max-height: 100px;
+    max-width: 70px; */
+    /* Puedes agregar más propiedades específicas aquí:    */
+    width: 60px;            /* ancho fijo */
+    height: 30px;           /* alto fijo */
+    transform: scale(4);  /* escalar */
+    margin: 3px;           /*  margen específico */
+     margin-right: 150px; /* Separación específica del borde derecho */
+
+}
+
+.title {
+    flex: 1;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.title h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Ajustar el mapa para que ocupe el espacio restante */
+.leaflet-map {
+    flex: 1;
+    height: calc(100vh - 80px);
+}
+
+/* Estilos para el marcador de waypoint de elevación */
+.elevation-waypoint-marker {
+    background-color: black;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    border: 1px solid gray;
+}
+
+/* Oculta el ícono de tachuela por completo */
+.elevation-waypoint-icon {
+    display: none;
+}
+
+/* Responsive para dispositivos móviles */
+@media (max-width: 768px) {
+    .header {
+        height: 70px;
+        padding: 5px 10px;
     }
+    
+    .title h1 {
+        font-size: 18px;
+    }
+    
+    /* Logos específicos en tablet */
+    .logo-left-img {
+        max-height: 40px;
+        max-width: 80px;
+    }
+    
+    .logo-right-img {
+        max-height: 30px;
+        max-width: 60px;
+    }
+    
+    .logo-left, .logo-right {
+        width: 70px;
+    }
+    
+    .leaflet-map {
+        height: calc(100vh - 70px);
+    }
+}
 
-    #logo{
-        margin-right: 0;
-        margin-bottom: 10px;
+@media (max-width: 480px) {
+    .title h1 {
+        font-size: 16px;
+    }
+    
+    .header {
+        padding: 5px;
+    }
+    
+    .title {
+        padding: 0 10px;
+    }
+    
+    /* Logos específicos en móvil */
+    .logo-left-img {
+        max-height: 35px;
+        max-width: 70px;
+    }
+    
+    .logo-right-img {
+        max-height: 25px;
+        max-width: 50px;
     }
 }
